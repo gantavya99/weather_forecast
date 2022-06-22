@@ -19,14 +19,29 @@ class _WeatherForecastState extends State<WeatherForecast> {
     // TODO: implement initState
     super.initState();
     forecastObject = Network().getWeatherForecast(cityName: _cityName);
+    forecastObject!.then((weather) => {print(weather.city)});
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Forecast'),
-      ),
+        body: ListView(
+      children: <Widget>[
+        textFieldView(),
+      ],
+    ));
+  }
+
+  Widget textFieldView() {
+    return Container(
+        child: TextField(
+      decoration: InputDecoration(
+          hintText: 'Enter City Name !',
+          prefixIcon: Icon(Icons.search),
+          border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10)),
+          contentPadding: EdgeInsets.all(8)),
+    )
     );
   }
 }
